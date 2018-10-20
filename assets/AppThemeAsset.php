@@ -15,17 +15,25 @@ use yii\web\AssetBundle;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppAsset extends AssetBundle
+class AppThemeAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
+
+        'css/app.css',
+        'js/owl-carousel/assets/owl.carousel.min.css',
+        'js/mCustomScrollbar/jquery.mCustomScrollbar.css',
+        'css/style.css',
     ];
     public $js = [
+        //'js/jquery-3.3.1.min.js',
+        'js/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js',
+        'js/owl-carousel/owl.carousel.min.js',
+        'js/script.js',
         ];
     public $depends = [
-//        'yii\web\YiiAsset',
+        'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];
 }

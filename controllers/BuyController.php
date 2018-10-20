@@ -37,6 +37,7 @@ class BuyController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'max';
         $dataProvider = new ActiveDataProvider([
             'query' => BuyRequest::find(),
         ]);
@@ -54,6 +55,7 @@ class BuyController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout = 'max';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -66,6 +68,7 @@ class BuyController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = 'max';
         $model = new BuyRequest();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -89,6 +92,7 @@ class BuyController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = 'max';
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
