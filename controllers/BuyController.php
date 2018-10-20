@@ -101,6 +101,8 @@ class BuyController extends Controller
 
         $categories = ArrayHelper::map($categories, 'id', 'name');
 
+       //$images = $model->imageToBuyRequests[0];
+
         return $this->render('update', [
             'model' => $model,
             'categories' => $categories

@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?//= $form->field($model, 'user_id')->textInput() ?>
+
 
 <div class="row">
 <?= $form->field($model, 'title', [
@@ -79,3 +79,57 @@ use yii\widgets\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 <!--</div>-->
+<div class="popup">
+
+    <div class="inner">
+        <h2>Show sellers what you like</h2>
+
+
+        <!--<form action="">-->
+
+        <div class="products--container" data-mcs-theme="dark">
+            <div class="container">
+                <div class="row products">
+                    <label for="product-01" class="col-md-4--theme">
+                        <input type="checkbox" name="product-01" id="product-01">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+                    <label for="product-02" class="col-md-4--theme">
+                        <input type="checkbox" name="product-02" id="product-02">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+                    <label for="product-03" class="col-md-4--theme">
+                        <input type="checkbox" name="product-03" id="product-03">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+                    <label for="product-04" class="col-md-4--theme">
+                        <input type="checkbox" name="product-04" id="product-04">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+                    <label for="product-05" class="col-md-4--theme">
+                        <input type="checkbox" name="product-05" id="product-05">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+                    <label for="product-06" class="col-md-4--theme">
+                        <input type="checkbox" name="product-06" id="product-06">
+                        <span class="like"></span>
+                        <img src="/../img/carousel-img.png" alt="product">
+                    </label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-row">
+            <button class="btn popup-toggle" id="popup-closer">Done</button>
+        </div>
+        <!--</form>-->
+
+    </div>
+
+</div>
