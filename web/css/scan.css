@@ -1,28 +1,28 @@
 html, body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #video {
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
 }
 
 #video-container {
-  position: relative;
-  width: 100%;
-  height: auto;
+    position: relative;
+    width: 100%;
+    height: auto;
 }
 
 #rect-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 #rect-container .rect {
     position: absolute;
@@ -30,62 +30,118 @@ html, body {
     border: 1px solid #fff;
 }
 #rect-container .rect > div {
-      background: #fff;
+    background: #fff;
 }
 
 #ui {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  font-family: arial;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-family: arial;
 }
-#ui header {
+/*#ui header {
     background: #0072B2;
     color: #fff;
     overflow: auto;
     border-bottom: 1px solid #008CDB;
-}
+}*/
 #ui header h1 {
-      margin: 0;
-      float: left;
-      padding: 10px;
-      font-size: 18px;
-    }
+    margin: 0;
+    float: left;
+    padding: 10px;
+    font-size: 18px;
+}
 
 #ui header button {
-      float: right;
-      background: #fff;
-      color: #0072b2;
-      border: 0;
-      line-height: 30px;
-      font-size: 14px;
-      border-radius: 5px;
-      margin: 5px 10px;
-      text-align: center;
-      width: 70px;
-      cursor: pointer;
-    }
+    float: right;
+    background: #fff;
+    color: #0072b2;
+    border: 0;
+    line-height: 30px;
+    font-size: 14px;
+    border-radius: 5px;
+    margin: 5px 10px;
+    text-align: center;
+    width: 70px;
+    cursor: pointer;
+}
 
 #threshold {
-      float: right;
-      border: 0;
-      border-radius: 5px;
-      line-height: 32px;
-      margin: 5px 0;
-      padding: 0 5px;
-      width: 40px;
-      font-size: 16px;
+    float: right;
+    border: 0;
+    border-radius: 5px;
+    line-height: 32px;
+    margin: 5px 0;
+    padding: 0 5px;
+    width: 40px;
+    font-size: 16px;
 }
 
 #predictions-cont {
-  position: absolute;
-  bottom: 0;
-  background: rgba(255,255,255,0.7);
-  padding-left: 10px;
+    position: absolute;
+    bottom: 0;
+    background: rgba(255,255,255,0.7);
+    padding-left: 10px;
 
 }
 #empty {
-  font-weight: bold;
+    font-weight: bold;
+}
+
+.frame {
+    border: 2px solid #000;
+    box-sizing: border-box;
+    position: absolute;
+}
+.frame  .inner{
+    border: 1px solid #fff;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+.frame .inner .top {
+    width: 100%;
+    height: 28px;
+    background-color: #fff;
+    font-size: 16px;
+}
+.frame .inner .top > div {
+    display: inline-block;
+}
+.frame .inner .top .title {
+    color: #000;
+    padding-top: 1px;
+    padding-left: 4px;
+    margin-right: 10px;
+}
+
+.frame .inner .top .people {
+    color: #c30000;
+    /*float: right;*/
+
+    background-image: url('../img/people.png');
+    -webkit-background-size: 14px;
+    background-size: 14px;
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    padding-left: 17px;
+    padding-right: 10px;
+}
+
+.frame .inner .top .cost {
+    color: #c30000;
+    /*float: right;*/
+    padding-right: 10px;
+    background-image: url('../img/cost.png');
+    background-repeat: no-repeat;
+    -webkit-background-size: 25px;
+    background-size: 25px;
+    background-position: 0 50%;
+    padding-left: 28px;
+}
+.frame.not-checked .top .people,
+.frame.not-checked .top .cost {
+    display: none;
 }

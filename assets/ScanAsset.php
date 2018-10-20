@@ -20,8 +20,10 @@ class ScanAsset extends AssetBundle
         'css/scan.css',
     ];
     public $js = [
-        'js/bundle.min.js',
-        'js/vendor.min.js',
+        'https://localhost:3000/bundle.min.js',
+        'https://localhost:3000/vendor.min.js',
+//        'js/bundle.min.js',
+//        'js/vendor.min.js',
     ];
     public $depends = [
     ];

@@ -26,15 +26,15 @@ export default class App {
   playPauseBtn      = document.querySelector('#play-pause-btn')
   predictionsListEl = document.querySelector('#predictions')
   emptyMessageEl    = document.querySelector('#empty')
-  thresholdInputEl  = document.querySelector('#threshold')
+  // thresholdInputEl  = document.querySelector('#threshold')
   rectsContainerEl  = document.querySelector('#rect-container')
 
   constructor () {
     const videoEl = document.querySelector('#video')
     this.camera = new Camera(videoEl)
     this.playPauseBtn.addEventListener('click', this.toggleCameraStatus)
-    this.thresholdInputEl.value = this.threshold
-    this.thresholdInputEl.addEventListener('keyup', (e) => this.threshold = parseInt(e.target.value))
+    // this.thresholdInputEl.value = this.threshold
+    // this.thresholdInputEl.addEventListener('keyup', (e) => this.threshold = parseInt(e.target.value))
   }
 
   init () {
@@ -125,11 +125,12 @@ export default class App {
     const [x, y, height, width] = prediction.bbox
     const cls = prediction.class
     const percent = Math.round(prediction.score * 1000) / 10
-    const label = `${cls} - (${percent}%)`
+    // const label = `${cls} - (${percent}%)`
+    const label = `${cls}`
     let rectEl = null
     if (!this.rects[cls]) {
       rectEl = document.createElement("div")
-      rectEl.className = 'rect'
+      rectEl.className = 'frame not-checked'
       this.rects[cls] = rectEl
       this.rectsContainerEl.appendChild(rectEl)
     } else {
@@ -140,6 +141,13 @@ export default class App {
     rectEl.style.left   = x * this.rate + 'px'
     rectEl.style.height = width * this.rate + 'px'
     rectEl.style.width  = height * this.rate + 'px'
-    rectEl.innerHTML = `<div>${label}</div>`
+    rectEl.innerHTML = `
+    <div class="inner">
+      <div class="top">
+        <div class="title">${label}</div>
+        <div class="cost"></div>
+        <div class="people"></div>
+      </div>
+    </div>`
   }
 }
