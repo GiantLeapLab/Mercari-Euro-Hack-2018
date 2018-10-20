@@ -11,6 +11,7 @@ use yii\db\ActiveRecord;
  * @property string $name
  *
  * @property BuyRequest[] $buyRequests
+ * @property CategoryToImage[] $categoryToImages
  * @property SellRequest[] $sellRequests
  */
 class Category extends ActiveRecord
@@ -51,6 +52,14 @@ class Category extends ActiveRecord
     public function getBuyRequests()
     {
         return $this->hasMany(BuyRequest::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategoryToImages()
+    {
+        return $this->hasMany(CategoryToImage::className(), ['category_id' => 'id']);
     }
 
     /**

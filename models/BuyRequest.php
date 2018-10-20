@@ -18,6 +18,8 @@ use yii\web\UploadedFile;
  * @property string $imageFile
  *
  * @property User $user
+ * @property Category $category
+ * @property ImageToBuyRequest[] $imageToBuyRequests
  */
 class BuyRequest extends ActiveRecord
 {
@@ -81,5 +83,13 @@ class BuyRequest extends ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getImageToBuyRequests()
+    {
+        return $this->hasMany(ImageToBuyRequest::className(), ['buy_request_id' => 'id']);
     }
 }
