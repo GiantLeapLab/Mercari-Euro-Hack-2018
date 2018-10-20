@@ -1,6 +1,3 @@
-
-export const MODEL_FILE   = '/web/js/mobilenet_models/demo/tensorflowjs_model.pb'
-export const WEIGHTS_FILE = '/web/js/mobilenet_models/demo/weights_manifest.json'
 export const INPUT_NODE_NAME  = 'input'
 export const OUTPUT_NODE_NAME = 'final_result'
 // export const OUTPUT_NODE_NAME = 'MobilenetV2/Predictions/Reshape_1'

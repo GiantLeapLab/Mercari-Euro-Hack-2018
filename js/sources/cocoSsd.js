@@ -1,7 +1,7 @@
 import * as tf from '@tensorflow/tfjs'
 import { OBJECT_CLASSES } from './constants'
 
-const BASE_PATH = '/web/js/mobilenet_models';
+const BASE_PATH = '/js/mobilenet_models';
 
 export async function load() {
   if (tf == null) {
