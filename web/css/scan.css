@@ -39,10 +39,10 @@ html, body {
 
 #ui {
     position: fixed;
-    top: 60px;
+    top: 50px;
     left: 0;
     width: 100%;
-    height: 100%;
+    bottom: 0;
     font-family: arial;
 }
 /*#ui header {
@@ -149,4 +149,70 @@ html, body {
 .frame.not-checked .top .people,
 .frame.not-checked .top .cost {
     display: none;
+}
+
+.results {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 2px
+}
+
+.results .result {
+    height: 28px;
+    margin: 0 5px 2px 5px;
+    clear: both;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .8);
+    padding: 0
+}
+
+.results .result .data {
+    overflow: hidden;
+    padding-left: 7px;
+    font-size: 16px;
+    width: 100%
+}
+
+.results .result .data .title {
+    float: left;
+    color: #000;
+    padding-top: 3px
+}
+
+.results .result .data .buyers {
+    font-size: 14px;
+    color: #c30000;
+    text-align: right;
+    float: right;
+    margin-right: 9px;
+    padding-top: 5px
+}
+
+.results .result .data .cost {
+    padding-top: 2px;
+    padding-left: 7px;
+    float: right;
+    width: 100px;
+    height: 28px;
+    background-color: #004b85;
+    color: #70b3e4;
+    font-size: 18px;
+    text-align: left
+}
+
+.results .result.result-full {
+    background-color: rgba(170, 212, 245, .8);
+    margin-bottom: 5px
+}
+
+.results .result.result-full .data {
+    text-align: right;
+    color: #003761;
+    font-size: 18px
+}
+
+.results .result.result-full .data .cost {
+    color: #fff;
+    margin-left: 7px
 }

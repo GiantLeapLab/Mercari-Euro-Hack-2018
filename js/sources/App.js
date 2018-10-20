@@ -33,6 +33,7 @@ export default class App {
   snapshotsEl       = document.querySelector('#snapshots')
   rectsContainerEl  = document.querySelector('#rect-container')
   submitBtn         = document.querySelector('#submit-btn')
+  resultsEl         = document.querySelector('#results-list')
 
   constructor () {
     const videoEl = document.querySelector('#video')
@@ -127,6 +128,7 @@ export default class App {
       needSnapshot.forEach(cls => this.detectedItems[cls].image = imgId)
     }
     this.updatePredictionsList(predictions)
+    this.updateResultsList()
   }
 
   updatePredictionsList (predictions) {
@@ -174,25 +176,17 @@ export default class App {
     rectEl.style.left   = x * this.rate + 'px'
     rectEl.style.height = height * this.rate + 'px'
     rectEl.style.width  = width * this.rate + 'px'
-    if (this.detectedItems[cls].checked) {
-      const { cost, people } = this.detectedItems[cls]
-      rectEl.className = 'frame checked'
-      rectEl.innerHTML = `
-        <div class="inner">
-          <div class="top">
-            <div class="title">${label}</div>
-            <div class="cost">${cost}</div>
-            <div class="people">${people}</div>
-          </div>
-        </div>`
-    } else {
-      rectEl.className = 'frame not-checked'
-      rectEl.innerHTML = `<div class="inner">
+    const { checked, minCost, maxCost, people } = this.detectedItems[cls]
+    const cost = maxCost ? `${minCost}-${maxCost}` : `${minCost}`
+    rectEl.className = `frame ${checked ? 'checked' : 'not-checked'}`
+    rectEl.innerHTML = `
+      <div class="inner">
         <div class="top">
           <div class="title">${label}</div>
+          ${checked && maxCost ? `<div class="cost">${cost}</div>` : ''}
+          ${checked ? `<div class="people">${people}</div>` : ''}
         </div>
       </div>`
-    }
   }
 
   initDemandChecking () {
@@ -224,10 +218,16 @@ export default class App {
                   return
                 }
                 const { minCost, maxCost, people } = json[c]
-                this.detectedItems[c].cost = minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`
-                this.detectedItems[c].checked = true
-                this.detectedItems[c].people = people
+                this.detectedItems[c] = {
+                  ...this.detectedItems[c],
+                  ...json[c],
+                  checked : true,
+                }
+                // this.detectedItems[c].cost = minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`
+                // this.detectedItems[c].checked = true
+                // this.detectedItems[c].people = people
               })
+              this.updateResultsList()
             })
         })
         .catch((err) => {
@@ -245,7 +245,7 @@ export default class App {
 
   submit = () => {
     const arr = keys(this.detectedItems).map(c => {
-      const {checked, cost, people, ...other} = this.detectedItems[c]
+      const {checked, minCost, maxCost, people, ...other} = this.detectedItems[c]
       return other
     })
     postSubmit('/sell/step-2', {
@@ -254,5 +254,38 @@ export default class App {
         images : this.snapshots,
       }
     })
+  }
+
+  updateResultsList = () => {
+    let resHtml = ''
+    const classes = keys(this.detectedItems).filter(c => this.detectedItems[c].checked)
+    let minTotal = 0
+    let maxTotal = 0
+    classes.forEach(c => {
+      const item = this.detectedItems[c]
+      const { minCost, maxCost, people } = item
+      const cost = maxCost != minCost ? `$${minCost}-${maxCost}` : `$${minCost}`
+      minTotal += parseFloat(minCost) || 0
+      maxTotal += parseFloat(maxCost) || 0
+      resHtml += `<div class="result">
+        <div class="data">
+          <div class="title">${item.class}</div>
+          ${`<div class="cost">${maxCost ? cost : ''}</div>`}
+          <div class="buyers">${parseInt(people) ? `${people} people coud buy it` : `no one is looking for it right now`}</div>
+        </div>
+      </div>`
+    })
+    if (classes.length && maxTotal) {
+      const total = maxTotal == minTotal ? maxTotal : `${minTotal}-${maxTotal}`
+      resHtml += `<div class="result result-full">
+        <div class="data">
+          You could earn:
+          <div class="cost">$${total}</div>
+        </div>
+      </div>`
+    }
+
+    this.resultsEl.innerHTML = resHtml
+
   }
 }

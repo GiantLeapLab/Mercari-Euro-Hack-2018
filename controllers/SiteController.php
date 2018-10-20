@@ -57,6 +57,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->redirect('buy/index');
+
         return $this->render('index');
     }
 
