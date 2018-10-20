@@ -104,11 +104,14 @@ export class ObjectDetection {
       bbox[1] = minY;
       bbox[2] = maxX - minX;
       bbox[3] = maxY - minY;
-      objects.push({
-        bbox: bbox,
-        class: OBJECT_CLASSES[classes[indexes[i]] + 1].displayName,
-        score: scores[indexes[i]]
-      });
+      const objClass = OBJECT_CLASSES[classes[indexes[i]] + 1]
+      if (objClass) {
+        objects.push({
+          bbox: bbox,
+          class: objClass.displayName,
+          score: scores[indexes[i]]
+        });
+      }
     }
     return objects;
   }
