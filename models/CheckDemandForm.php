@@ -28,7 +28,7 @@ class CheckDemandForm extends Model
         
         //bulk data
         return [
-            'cell-phone' => [
+            'cell phone' => [
                 'minCost' => 45,
                 'maxCost' => 700,
                 'people' => 12,
@@ -37,6 +37,11 @@ class CheckDemandForm extends Model
                 'minCost' => 300,
                 'maxCost' => 1300,
                 'people' => 5,
+            ],
+            'person' => [
+                'minCost' => 35000,
+                'maxCost' => 1000000,
+                'people' => 123,
             ],
         ];
     }
