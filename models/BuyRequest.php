@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "buy_request".
@@ -62,6 +63,7 @@ class BuyRequest extends ActiveRecord
             'min_price' => 'From',
             'max_price' => 'To',
             'description' => 'Additional details',
+            'imageFile' => 'Upload your product picture if you have it',
         ];
     }
 

@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use app\assets\AppThemeAsset;
 
+AppThemeAsset::register($this);
 
 /* @var $this yii\web\View */
 /* @var $model app\Models\BuyRequest */
@@ -17,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
-        'categories' => $categories
+        'categories' => $categories,
     ]) ?>
 
 <!--</div>-->

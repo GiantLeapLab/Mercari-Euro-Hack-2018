@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use Yii;
-use app\Models\BuyRequest;
+use app\models\BuyRequest;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -37,6 +37,7 @@ class BuyController extends Controller
      */
     public function actionIndex()
     {
+        $this->layout = 'max';
         $dataProvider = new ActiveDataProvider([
             'query' => BuyRequest::find(),
         ]);
@@ -54,6 +55,7 @@ class BuyController extends Controller
      */
     public function actionView($id)
     {
+        $this->layout = 'max';
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -66,9 +68,11 @@ class BuyController extends Controller
      */
     public function actionCreate()
     {
+        $this->layout = 'max';
         $model = new BuyRequest();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $res = $model->load(Yii::$app->request->post());
+        $model->user_id = Yii::$app->user->id;
+        if ( $res && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         $categories     = Category::find()->all();
@@ -89,6 +93,7 @@ class BuyController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = 'max';
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
