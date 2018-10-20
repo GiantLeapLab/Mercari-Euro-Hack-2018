@@ -9,9 +9,9 @@ AppThemeAsset::register($this);
 /* @var $model app\Models\BuyRequest */
 
 $this->title = 'Update Buy Request: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Buy Requests', 'url' => ['index']];
+/*$this->params['breadcrumbs'][] = ['label' => 'Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Update';*/
 ?>
 <div class="buy-request-update">
 

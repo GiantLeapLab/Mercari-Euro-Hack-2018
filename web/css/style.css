@@ -2368,9 +2368,10 @@ textarea {
     padding: 10px
 }
 
-.btn, input[type=submit] {
+.btn, input[type=submit],
+.btn, input[type=submit]:hover{
     text-align: center;
-    background-color: #456192;
+    background-color: #456192 !important;
     font-size: 18px;
     color: #dce1e9;
     line-height: 20px;
