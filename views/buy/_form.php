@@ -24,7 +24,23 @@ use yii\widgets\ActiveForm;
 </div>
 
 <div class="row">
-    <?= $form->field($model, 'imageFile')->fileInput() ?>
+    <?= $form->field($model, 'imageFile', [
+        'options' => ['class'=>'form-group col-md-4'],
+        'labelOptions' => ['class' => 'block'],
+        'template' => "{label}\n{input}\n<span class=\"file-block\"></span>",
+    ])->fileInput() ?>
+    <div class="col-md-8 content">
+        <a href="#" class="label block popup-toggle carousel-label" id="popup-opener">Choose the 'laptop' products you like <br>from our library</a>
+        <div class="carousel owl-carousel">
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+        </div>
+    </div>
 </div>
 
 <div class="row price-row">

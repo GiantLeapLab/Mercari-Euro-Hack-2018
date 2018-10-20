@@ -2386,7 +2386,7 @@ textarea {
 }
 
 .label, label {
-    color: #0b2353;
+    color: #0b2353 !important;
     margin-bottom: 8px
 }
 
@@ -2411,8 +2411,8 @@ input[type=file] {
 }
 
 .carousel-label {
-    margin-top: 35px;
-    margin-bottom: 17px
+    margin-top: 17px;
+    margin-bottom: 25px;
 }
 
 .price-row {

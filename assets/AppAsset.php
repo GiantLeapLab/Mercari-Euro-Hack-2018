@@ -23,11 +23,18 @@ class AppAsset extends AssetBundle
 //        'css/style.css',
 //        'css/app.css',
         'css/site.css',
-        'css/style.css',
+
         'css/app.css',
+        'js/owl-carousel/assets/owl.carousel.min.css',
+        'js/mCustomScrollbar/jquery.mCustomScrollbar.css',
+        'css/style.css',
     ];
     public $js = [
-    ];
+        //'js/jquery-3.3.1.min.js',
+        'js/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js',
+        'js/owl-carousel/owl.carousel.min.js',
+        'js/script.js',
+        ];
     public $depends = [
 //        'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

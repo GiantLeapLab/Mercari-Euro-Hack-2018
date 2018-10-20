@@ -176,4 +176,12 @@ header {
     margin-left: 7px
 }
 
+.carousel-label{
+    font-size: 100%;
+    text-align: left;
+    padding: 0;
+    text-decoration-line: underline;
+}
+
+
 /*# sourceMappingURL=app.css.map */
