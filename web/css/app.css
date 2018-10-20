@@ -49,16 +49,16 @@ header {
     background-color: #004b85
 }
 
-.video, video {
+/*.video, video {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 1
-}
+}*/
 
-.app {
+/*.app {
     z-index: 2
 }
 
@@ -174,7 +174,7 @@ header {
 .app .results .result.result-full .data .cost {
     color: #fff;
     margin-left: 7px
-}
+}*/
 
 .carousel-label{
     font-size: 100%;
