@@ -2,21 +2,21 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "sell_request".
  *
  * @property int $id
  * @property int $user_id
+ * @property int $category_id
  * @property string $title
  * @property double $price
  * @property string $description
- * @property int $category_id
  *
  * @property User $user
  */
-class SellRequest extends \yii\db\ActiveRecord
+class SellRequest extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -33,7 +33,7 @@ class SellRequest extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'title', 'price'], 'required'],
-            [['user_id'], 'integer'],
+            [['user_id', 'category_id'], 'integer'],
             [['price'], 'number'],
             [['title', 'description'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -49,6 +49,7 @@ class SellRequest extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
+            'category_id' => 'Category ID',
             'title' => 'Title',
             'price' => 'Price',
             'description' => 'Description',
@@ -61,5 +62,13 @@ class SellRequest extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }
