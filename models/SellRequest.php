@@ -12,6 +12,7 @@ use Yii;
  * @property string $title
  * @property double $price
  * @property string $description
+ * @property int $category_id
  *
  * @property User $user
  */
@@ -36,6 +37,7 @@ class SellRequest extends \yii\db\ActiveRecord
             [['price'], 'number'],
             [['title', 'description'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
 
