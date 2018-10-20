@@ -33,6 +33,7 @@ export default class App {
   snapshotsEl       = document.querySelector('#snapshots')
   rectsContainerEl  = document.querySelector('#rect-container')
   submitBtn         = document.querySelector('#submit-btn')
+  resultsEl         = document.querySelector('#results-list')
 
   constructor () {
     const videoEl = document.querySelector('#video')
@@ -127,6 +128,7 @@ export default class App {
       needSnapshot.forEach(cls => this.detectedItems[cls].image = imgId)
     }
     this.updatePredictionsList(predictions)
+    this.updateResultsList()
   }
 
   updatePredictionsList (predictions) {
@@ -225,6 +227,7 @@ export default class App {
                 // this.detectedItems[c].checked = true
                 // this.detectedItems[c].people = people
               })
+              this.updateResultsList()
             })
         })
         .catch((err) => {
@@ -251,5 +254,38 @@ export default class App {
         images : this.snapshots,
       }
     })
+  }
+
+  updateResultsList = () => {
+    let resHtml = ''
+    const classes = keys(this.detectedItems).filter(c => this.detectedItems[c].checked)
+    let minTotal = 0
+    let maxTotal = 0
+    classes.forEach(c => {
+      const item = this.detectedItems[c]
+      const { minCost, maxCost, people } = item
+      const cost = maxCost != minCost ? `$${minCost}-${maxCost}` : `$${minCost}`
+      minTotal += minCost || 0
+      maxTotal += maxCost || 0
+      resHtml += `<div class="result">
+        <div class="data">
+          <div class="title">${item.class}</div>
+          ${`<div class="cost">${maxCost ? cost : ''}</div>`}
+          <div class="buyers">${people ? `${people} people coud buy it` : `noone is looking for it right now`}</div>
+        </div>
+      </div>`
+    })
+    if (classes.length && maxTotal) {
+      const total = maxTotal == minTotal ? maxTotal : `${minTotal}-${maxTotal}`
+      resHtml += `<div class="result">
+        <div class="data">
+          You could earn:
+          <div class="cost">${total}</div>
+        </div>
+      </div>`
+    }
+
+    this.resultsEl.innerHTML = resHtml
+
   }
 }

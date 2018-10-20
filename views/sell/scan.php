@@ -21,7 +21,7 @@ app\assets\ScanAsset::register($this);
     <div id="empty">
 
     </div>
-    <div id="snapshots">
+    <div id="results-list" class="results">
 
     </div>
   </div>
