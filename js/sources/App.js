@@ -1,6 +1,8 @@
 // import * as cocoSsd from '@tensorflow-models/coco-ssd'
+import { keys } from 'lodash'
 import * as cocoSsd from './cocoSsd'
 import Camera from './Camera'
+import { fetchPost } from './transport'
 import {
   VIDEO_PIXELS,
   STATUS_PLAYED,
@@ -20,6 +22,8 @@ export default class App {
   ratio = 1
 
   rects = {}
+
+  detectedItems = {}
 
   threshold = 50
 
@@ -53,6 +57,7 @@ export default class App {
       .then(() => {
         this.emptyMessageEl.innerHTML = '<div>Loading complete</div>'
         this.predict()
+        this.initDemandChecking()
       })
   }
 
@@ -90,10 +95,21 @@ export default class App {
       return
     }
     const predictions = await this.model.detect(this.camera.videoEl)
-    this.updatePredictionsList(predictions)
+    this.predictionsHandler(predictions)
 
     requestAnimationFrame(() => this.predict())
     // setTimeout(() => this.predict(), 500)
+  }
+
+  predictionsHandler = (predictions) => {
+    predictions.forEach(p => {
+      if (!this.detectedItems[p.class]) {
+        this.detectedItems[p.class] = {
+          checked : false,
+        }
+      }
+    })
+    this.updatePredictionsList(predictions)
   }
 
   updatePredictionsList (predictions) {
@@ -130,7 +146,7 @@ export default class App {
     let rectEl = null
     if (!this.rects[cls]) {
       rectEl = document.createElement("div")
-      rectEl.className = 'frame not-checked'
+
       this.rects[cls] = rectEl
       this.rectsContainerEl.appendChild(rectEl)
     } else {
@@ -141,13 +157,67 @@ export default class App {
     rectEl.style.left   = x * this.rate + 'px'
     rectEl.style.height = width * this.rate + 'px'
     rectEl.style.width  = height * this.rate + 'px'
-    rectEl.innerHTML = `
-    <div class="inner">
-      <div class="top">
-        <div class="title">${label}</div>
-        <div class="cost"></div>
-        <div class="people"></div>
-      </div>
-    </div>`
+    if (this.detectedItems[cls].checked) {
+      const { cost, people } = this.detectedItems[cls]
+      rectEl.className = 'frame checked'
+      rectEl.innerHTML = `
+        <div class="inner">
+          <div class="top">
+            <div class="title">${label}</div>
+            <div class="cost">${cost}</div>
+            <div class="people">${people}</div>
+          </div>
+        </div>`
+    } else {
+      rectEl.className = 'frame not-checked'
+      rectEl.innerHTML = `<div class="inner">
+        <div class="top">
+          <div class="title">${label}</div>
+        </div>
+      </div>`
+    }
+  }
+
+  initDemandChecking () {
+    this.chkDemandTimer = setInterval(() => {
+      const classes = keys(this.detectedItems).filter(c => !this.detectedItems[c].checked)
+      this.checkDemand(classes)
+    }, 3000)
+  }
+
+  checkDemand (classes = []) {
+    if (!classes.length) {
+      return
+    }
+    fetchPost(
+      '/sell/check-demand',
+      'CheckDemandForm',
+      { classes }
+    ).then(resp => {
+          if (resp.status >= 400) {
+            return resp.json().then((json) => {
+              console.error(resp.status, json)
+            })
+          }
+          return resp.json()
+            .then(json => {
+              const classes = keys(json)
+              classes.forEach(c => {
+                if (!this.detectedItems[c]) {
+                  return
+                }
+                const { minCost, maxCost, people } = json[c]
+                this.detectedItems[c] = {
+                  checked : true,
+                  cost : minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`,
+                  people
+                }
+              })
+            })
+        })
+        .catch((err) => {
+          console.log(err)
+          console.error(err)
+        })
   }
 }
