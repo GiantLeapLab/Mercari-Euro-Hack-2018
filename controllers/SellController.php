@@ -27,8 +27,7 @@ class SellController extends Controller
     public function actionCheckDemand()
     {
         $model = new CheckDemandForm();
-//        $model->load(Yii::$app->request->post());
-        $model->classes = ['cup', 'car', 'boat'];
+        $model->load(Yii::$app->request->post());
 
         Yii::$app->response->format = 'json';
         
