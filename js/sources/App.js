@@ -174,25 +174,17 @@ export default class App {
     rectEl.style.left   = x * this.rate + 'px'
     rectEl.style.height = height * this.rate + 'px'
     rectEl.style.width  = width * this.rate + 'px'
-    if (this.detectedItems[cls].checked) {
-      const { cost, people } = this.detectedItems[cls]
-      rectEl.className = 'frame checked'
-      rectEl.innerHTML = `
-        <div class="inner">
-          <div class="top">
-            <div class="title">${label}</div>
-            <div class="cost">${cost}</div>
-            <div class="people">${people}</div>
-          </div>
-        </div>`
-    } else {
-      rectEl.className = 'frame not-checked'
-      rectEl.innerHTML = `<div class="inner">
+    const { checked, minCost, maxCost, people } = this.detectedItems[cls]
+    const cost = maxCost ? `${minCost}-${maxCost}` : `${minCost}`
+    rectEl.className = `frame ${checked ? 'checked' : 'not-checked'}`
+    rectEl.innerHTML = `
+      <div class="inner">
         <div class="top">
           <div class="title">${label}</div>
+          ${checked && maxCost ? `<div class="cost">${cost}</div>` : ''}
+          ${checked ? `<div class="people">${people}</div>` : ''}
         </div>
       </div>`
-    }
   }
 
   initDemandChecking () {
@@ -224,9 +216,14 @@ export default class App {
                   return
                 }
                 const { minCost, maxCost, people } = json[c]
-                this.detectedItems[c].cost = minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`
-                this.detectedItems[c].checked = true
-                this.detectedItems[c].people = people
+                this.detectedItems[c] = {
+                  ...this.detectedItems[c],
+                  ...json[c],
+                  checked : true,
+                }
+                // this.detectedItems[c].cost = minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`
+                // this.detectedItems[c].checked = true
+                // this.detectedItems[c].people = people
               })
             })
         })
@@ -245,7 +242,7 @@ export default class App {
 
   submit = () => {
     const arr = keys(this.detectedItems).map(c => {
-      const {checked, cost, people, ...other} = this.detectedItems[c]
+      const {checked, minCost, maxCost, people, ...other} = this.detectedItems[c]
       return other
     })
     postSubmit('/sell/step-2', {
