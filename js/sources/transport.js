@@ -56,3 +56,24 @@ function convertToFormNames (obj) {
 
     return out
   }
+
+  export function postSubmit (path, formData) {
+    const form = document.createElement("form")
+    form.setAttribute("method", 'POST')
+    form.setAttribute("action", path)
+
+    const params = convertToFormNames(formData)
+    
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        const hiddenField = document.createElement("input")
+        hiddenField.setAttribute("type", "hidden")
+        hiddenField.setAttribute("name", key)
+        hiddenField.setAttribute("value", params[key])
+        form.appendChild(hiddenField)
+      }
+    }
+
+    document.body.appendChild(form)
+    form.submit()
+}

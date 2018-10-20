@@ -8,6 +8,7 @@ export default class Camera {
 
   constructor (videoEl) {
     this.videoEl = videoEl
+    this.canvasEl = document.createElement('canvas')
   }
 
   async setup () {
@@ -44,4 +45,17 @@ export default class Camera {
     this.videoEl.play();
   }
 
+  snapshot (width, height) {
+    width = width || this.videoEl.width
+    height = height || this.videoEl.height
+    // const { width, height } = this.videoEl
+    this.canvasEl.height = height
+    this.canvasEl.width = width
+    let ctx = this.canvasEl.getContext('2d')
+    ctx.drawImage(this.videoEl, 0, 0, width, height)
+    // let img = new Image()
+    // img.src = this.canvasEl.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+    // return img
+    return this.canvasEl.toDataURL('image/png').replace('image/png', 'image/octet-stream')
+  }
 }

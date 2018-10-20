@@ -2,7 +2,7 @@
 import { keys } from 'lodash'
 import * as cocoSsd from './cocoSsd'
 import Camera from './Camera'
-import { fetchPost } from './transport'
+import { fetchPost, postSubmit } from './transport'
 import {
   VIDEO_PIXELS,
   STATUS_PLAYED,
@@ -30,13 +30,16 @@ export default class App {
   playPauseBtn      = document.querySelector('#play-pause-btn')
   predictionsListEl = document.querySelector('#predictions')
   emptyMessageEl    = document.querySelector('#empty')
-  // thresholdInputEl  = document.querySelector('#threshold')
+  snapshotsEl       = document.querySelector('#snapshots')
   rectsContainerEl  = document.querySelector('#rect-container')
+  submitBtn         = document.querySelector('#submit-btn')
 
   constructor () {
     const videoEl = document.querySelector('#video')
     this.camera = new Camera(videoEl)
+    this.snapshots = []
     this.playPauseBtn.addEventListener('click', this.toggleCameraStatus)
+    this.submitBtn.addEventListener('click', this.submit)
     // this.thresholdInputEl.value = this.threshold
     // this.thresholdInputEl.addEventListener('keyup', (e) => this.threshold = parseInt(e.target.value))
   }
@@ -102,13 +105,27 @@ export default class App {
   }
 
   predictionsHandler = (predictions) => {
+    const needSnapshot = []
     predictions.forEach(p => {
       if (!this.detectedItems[p.class]) {
+        const [x, y, width, height] = p.bbox
         this.detectedItems[p.class] = {
           checked : false,
+          class : p.class,
+          x, y, width, height
         }
+        needSnapshot.push(p.class)
       }
     })
+    if (needSnapshot.length) {
+      const stl = window.getComputedStyle(this.camera.videoEl)
+      const vh = parseInt(stl.height)
+      const vw = parseInt(stl.width)
+      const imgId = this.snapshots.push(this.camera.snapshot(vw, vh)) - 1
+      // const imgId = this.snapshots.push(this.camera.snapshot()) - 1
+      // this.updateSnapshotPreviews()
+      needSnapshot.forEach(cls => this.detectedItems[cls].image = imgId)
+    }
     this.updatePredictionsList(predictions)
   }
 
@@ -138,7 +155,7 @@ export default class App {
   }
 
   drawRect (prediction) {
-    const [x, y, height, width] = prediction.bbox
+    const [x, y, width, height] = prediction.bbox
     const cls = prediction.class
     const percent = Math.round(prediction.score * 1000) / 10
     // const label = `${cls} - (${percent}%)`
@@ -155,8 +172,8 @@ export default class App {
 
     rectEl.style.top    = y * this.rate + 'px'
     rectEl.style.left   = x * this.rate + 'px'
-    rectEl.style.height = width * this.rate + 'px'
-    rectEl.style.width  = height * this.rate + 'px'
+    rectEl.style.height = height * this.rate + 'px'
+    rectEl.style.width  = width * this.rate + 'px'
     if (this.detectedItems[cls].checked) {
       const { cost, people } = this.detectedItems[cls]
       rectEl.className = 'frame checked'
@@ -207,17 +224,35 @@ export default class App {
                   return
                 }
                 const { minCost, maxCost, people } = json[c]
-                this.detectedItems[c] = {
-                  checked : true,
-                  cost : minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`,
-                  people
-                }
+                this.detectedItems[c].cost = minCost != maxCost ? `${minCost}-${maxCost}` : `${minCost}`
+                this.detectedItems[c].checked = true
+                this.detectedItems[c].people = people
               })
             })
         })
         .catch((err) => {
-          console.log(err)
           console.error(err)
         })
+  }
+
+  updateSnapshotPreviews () {
+    let imgsHtml = ''
+    this.snapshots.forEach(s => {
+      imgsHtml += `<img src="${s}" />`
+    })
+    this.snapshotsEl.innerHTML = imgsHtml
+  }
+
+  submit = () => {
+    const arr = keys(this.detectedItems).map(c => {
+      const {checked, cost, people, ...other} = this.detectedItems[c]
+      return other
+    })
+    postSubmit('/sell/step-2', {
+      SellListForm : {
+        items : arr,
+        images : this.snapshots,
+      }
+    })
   }
 }
