@@ -20,7 +20,9 @@ use yii\widgets\ActiveForm;
     'options' => ['class' => 'form-group col-md-6 required '],
     'inputOptions' => ['class' => 'block']
 ])->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'category_id', ['options' => ['class' => 'form-group col-md-6 required ']])->dropDownList($categories) ?>
+<?= $form->field($model, 'category_id', [
+        'options' => ['class' => 'form-group col-md-6 required ']
+])->dropDownList($categories, ['class' => 'block']) ?>
 </div>
 
 <div class="row">
