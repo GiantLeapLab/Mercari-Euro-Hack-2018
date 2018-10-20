@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use Yii;
-use app\Models\BuyRequest;
+use app\models\BuyRequest;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
