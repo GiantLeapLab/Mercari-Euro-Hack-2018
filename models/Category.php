@@ -9,6 +9,9 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property string $name
+ *
+ * @property BuyRequest[] $buyRequests
+ * @property SellRequest[] $sellRequests
  */
 class Category extends ActiveRecord
 {
@@ -40,5 +43,21 @@ class Category extends ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBuyRequests()
+    {
+        return $this->hasMany(BuyRequest::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSellRequests()
+    {
+        return $this->hasMany(SellRequest::className(), ['category_id' => 'id']);
     }
 }
