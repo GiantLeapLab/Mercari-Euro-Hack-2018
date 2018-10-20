@@ -70,8 +70,9 @@ class BuyController extends Controller
     {
         $this->layout = 'max';
         $model = new BuyRequest();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $res = $model->load(Yii::$app->request->post());
+        $model->user_id = Yii::$app->user->id;
+        if ( $res && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         $categories     = Category::find()->all();
