@@ -49,6 +49,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'sell/find-offers/<product:\w+>' => 'sell/find-offers'
             ],
         ],
     ],
