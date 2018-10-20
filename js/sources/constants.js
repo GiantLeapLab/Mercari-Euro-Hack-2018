@@ -7,11 +7,11 @@ export const STATUS_PLAYED = 'played'
 export const STATUS_PAUSED = 'paused'
 
 export const OBJECT_CLASSES = {
-  1: {
-    name: '/m/01g317',
-    id: 1,
-    displayName: 'person',
-  },
+  // 1: {
+  //   name: '/m/01g317',
+  //   id: 1,
+  //   displayName: 'person',
+  // },
   2: {
     name: '/m/0199g',
     id: 2,
