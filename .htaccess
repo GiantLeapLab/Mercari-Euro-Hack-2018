@@ -1,0 +1,7 @@
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+RewriteRule ^([^/].*)?$ /web/$1
+</IfModule>
