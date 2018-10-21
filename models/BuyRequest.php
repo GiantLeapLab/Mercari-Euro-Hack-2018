@@ -60,8 +60,8 @@ class BuyRequest extends ActiveRecord
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
-            'category_id' => 'Product category',
-            'title' => 'Product type',
+            'category_id' => 'Product type',
+            'title' => 'Product name',
             'min_price' => 'From',
             'max_price' => 'To',
             'description' => 'Additional details',

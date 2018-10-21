@@ -10,7 +10,7 @@ use Yii;
  * @property int $image_id
  * @property int $sell_request_id
  *
- * @property Image $image
+ * @property Imagelist $image
  * @property SellRequest $sellRequest
  */
 class ImageToSellRequest extends \yii\db\ActiveRecord
@@ -52,7 +52,7 @@ class ImageToSellRequest extends \yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return $this->hasOne(Image::className(), ['id' => 'image_id']);
+        return $this->hasOne(ImageList::className(), ['id' => 'image_id']);
     }
 
     /**

@@ -69,4 +69,9 @@ class ImageList extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ImageToSellRequest::className(), ['image_id' => 'id']);
     }
+
+    public function getImageUrl($thumb = false)
+    {
+       return '';
+    }
 }

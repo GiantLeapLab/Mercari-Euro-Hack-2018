@@ -33,7 +33,15 @@ $this->title = 'Buyer Wishlist';
         ],
         'layout' => "{summary}\n<div class=\"row products\">{items}</div>\n{pager}",
         'itemView' => function ($model) {
-            return $this->render('_list_item', ['model' => $model]);
+            /**
+             * @var \app\models\BuyRequest $model
+             */
+            $images = $model->imageToBuyRequests;
+            $main_image = false;
+            if(!empty($images)) {
+                $main_image = $images[0]->image;
+            }
+            return $this->render('_list_item', ['model' => $model, 'image' => $main_image]);
         },
         'itemOptions' => [
                 'tag' => false

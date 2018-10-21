@@ -43,7 +43,7 @@ class BuyController extends Controller
                 'pageSize' => 9,
             ],
         ]);
-
+//$images = $model->imageToBuyRequests[0];
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);

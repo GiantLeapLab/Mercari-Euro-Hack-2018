@@ -121,5 +121,7 @@ header {
     background-color: transparent !important;
     font-size: 100%;
 }
-
+.select2-container--bootstrap .select2-selection{
+    background-color: #dce1e9 !important;
+}
 /*# sourceMappingURL=app.css.map */

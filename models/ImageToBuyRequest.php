@@ -11,7 +11,7 @@ use Yii;
  * @property int $buy_request_id
  *
  * @property BuyRequest $buyRequest
- * @property Image $image
+ * @property ImageList $image
  */
 class ImageToBuyRequest extends \yii\db\ActiveRecord
 {
@@ -60,6 +60,6 @@ class ImageToBuyRequest extends \yii\db\ActiveRecord
      */
     public function getImage()
     {
-        return $this->hasOne(Image::className(), ['id' => 'image_id']);
+        return $this->hasOne(Imagelist::className(), ['id' => 'image_id']);
     }
 }

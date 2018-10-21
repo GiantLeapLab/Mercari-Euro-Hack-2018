@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\Models\BuyRequest */
@@ -9,20 +11,31 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<!--<div class="buy-request-form">-->
+
 
     <?php $form = ActiveForm::begin(); ?>
 
 
 
 <div class="row">
+    <div class="col-md-6">
 <?= $form->field($model, 'title', [
-    'options' => ['class' => 'form-group col-md-6 required '],
+    'options' => ['class' => 'form-group required '],
     'inputOptions' => ['class' => 'block']
 ])->textInput(['maxlength' => true]) ?>
-<?= $form->field($model, 'category_id', [
-        'options' => ['class' => 'form-group col-md-6 required ']
-])->dropDownList($categories, ['class' => 'block']) ?>
+    </div>
+    <div class="col-md-6">
+<?= $form->field($model, 'category_id')->widget(Select2::classname(), [
+    'data' => $categories,
+    'options' => ['placeholder' => '', 'class' => 'col-md-6'],
+    'theme' => 'bootstrap',
+    'size' => Select2::MEDIUM,
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]); ?>
+    </div>
+
 </div>
 
 <div class="row">
