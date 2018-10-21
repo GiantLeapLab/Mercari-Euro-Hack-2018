@@ -32,7 +32,7 @@ $this->title = 'Buyer Wishlist';
             'id' => 'list-wrapper',
         ],
         'layout' => "{summary}\n<div class=\"row products\">{items}</div>\n{pager}",
-        'itemView' => function ($model) {
+        'itemView' => function ($model, $key, $index) {
             /**
              * @var \app\models\BuyRequest $model
              */
@@ -41,7 +41,7 @@ $this->title = 'Buyer Wishlist';
             if(!empty($images)) {
                 $main_image = $images[0]->image;
             }
-            return $this->render('_list_item', ['model' => $model, 'image' => $main_image]);
+            return $this->render('_list_item', ['model' => $model, 'image' => $main_image, 'index'=>$index]);
         },
         'itemOptions' => [
                 'tag' => false

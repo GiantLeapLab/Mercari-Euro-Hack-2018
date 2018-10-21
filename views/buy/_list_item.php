@@ -16,8 +16,15 @@ use yii\helpers\Url;
 
     </div>
     <div class="center">
-        <?= $image_url = !empty($image) ? $image->getImageUrl() : '';?>
-        <img src="/../img/carousel-img.png" alt="image">
+        <?php
+            $image = '';
+            if($index >= 0 && $index <=6) {
+                $image = '/../image_gallery/laptops/laptop-'.($index+1).'.jpg';
+            } else if ($index >=7 && $index <=8) {
+                $image = '/../image_gallery/phones/phone-'.($index+1).'.jpg';
+            }
+        ?>
+        <img src="<?= !empty($image) ? $image : '/../img/carousel-img.png' ?>" alt="image">
     </div>
     <div class="bottom">
         <div class="cost"><span class="cur">$</span><?= $model->min_price; ?>-<?= $model->max_price; ?></div>
