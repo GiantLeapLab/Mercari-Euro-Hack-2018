@@ -2385,7 +2385,8 @@ textarea {
     width: 110px;
     height: 33px
 }
-.btn:hover, input[type=submit]:hover{
+.btn:hover, input[type=submit]:hover,
+.btn:active, input[type=submit]:active{
     background-color: #273e67 !important;
 }
 .label, label {
