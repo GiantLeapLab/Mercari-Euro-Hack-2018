@@ -43,9 +43,20 @@ class SellListForm extends Model
 
 
         foreach ($this->items as $item) {
+            $item['x'] -= 20;
+            $item['y'] -= 20;
+            $item['width'] += 40;
+            $item['height'] += 40;
+            $item['x'] = $item['x'] < 0 ? 0 : $item['x'];
+            $item['y'] = $item['y'] < 0 ? 0 : $item['y'];
             $image_name = $item['x'] . 'x' . $item['y'] . '_' . $item['width'] . 'x' . $item['height'] . $images[$item['image']];
-            $imagine->open(self::IMAGE_PATH . $images[$item['image']])
-                ->crop(new Point($item['x'], $item['y']), new Box($item['width'], $item['height']))
+            $image = $imagine->open(self::IMAGE_PATH . $images[$item['image']]);
+            $size = $image->getSize(); // returns a BoxInterface
+            $width = $size->getWidth();
+            $height = $size->getHeight();
+            $item['width'] = $width < $item['x'] + $item['width'] ? $width - $item['x'] : $item['width'];
+            $item['height'] = $height < $item['y'] + $item['height'] ? $height - $item['y'] : $item['height'];
+            $image->crop(new Point($item['x'], $item['y']), new Box($item['width'], $item['height']))
                 ->save(self::IMAGE_PATH . $image_name);
 
             $model = new SellRequest();

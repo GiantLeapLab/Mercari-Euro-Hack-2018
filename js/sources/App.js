@@ -27,7 +27,7 @@ export default class App {
 
   threshold = 50
 
-  playPauseBtn      = document.querySelector('#play-pause-btn')
+  // playPauseBtn      = document.querySelector('#play-pause-btn')
   predictionsListEl = document.querySelector('#predictions')
   emptyMessageEl    = document.querySelector('#empty')
   snapshotsEl       = document.querySelector('#snapshots')
@@ -39,7 +39,7 @@ export default class App {
     const videoEl = document.querySelector('#video')
     this.camera = new Camera(videoEl)
     this.snapshots = []
-    this.playPauseBtn.addEventListener('click', this.toggleCameraStatus)
+    // this.playPauseBtn.addEventListener('click', this.toggleCameraStatus)
     this.submitBtn.addEventListener('click', this.submit)
     // this.thresholdInputEl.value = this.threshold
     // this.thresholdInputEl.addEventListener('keyup', (e) => this.threshold = parseInt(e.target.value))
@@ -83,14 +83,14 @@ export default class App {
     if (this.status == STATUS_PAUSED) {
       this.camera.play()
       this.status = STATUS_PLAYED
-      this.playPauseBtn.innerHTML = 'Pause'
+      // this.playPauseBtn.innerHTML = 'Pause'
       if (this.modelLoaded) {
         this.predict()
       }
     } else {
       this.camera.pause()
       this.status = STATUS_PAUSED
-      this.playPauseBtn.innerHTML = 'Play'
+      // this.playPauseBtn.innerHTML = 'Play'
     }
   }
 
@@ -135,11 +135,11 @@ export default class App {
   }
 
   updatePredictionsList (predictions) {
-    if (!predictions.length) {
-      this.emptyMessageEl.innerHTML = '<div>Not sure what is this</div>'
-    } else {
+    // if (!predictions.length) {
+    //   this.emptyMessageEl.innerHTML = '<div>Not sure what is this</div>'
+    // } else {
       this.emptyMessageEl.innerHTML = ''
-    }
+    // }
 
     const toDelete = []
     for (let cls in this.rects) {
@@ -289,6 +289,8 @@ export default class App {
         </div>
       </div>`
     }
+
+    this.submitBtn.style.visibility = classes.length ? 'visible' : 'hidden'
 
     this.resultsEl.innerHTML = resHtml
 
