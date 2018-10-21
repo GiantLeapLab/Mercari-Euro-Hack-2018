@@ -39,6 +39,9 @@ class BuyController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => BuyRequest::find(),
+            'pagination' => [
+                'pageSize' => 9,
+            ],
         ]);
 
         return $this->render('index', [
