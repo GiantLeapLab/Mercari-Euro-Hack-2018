@@ -43,7 +43,7 @@ class BuyController extends Controller
                 'pageSize' => 9,
             ],
         ]);
-//$images = $model->imageToBuyRequests[0];
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -73,7 +73,7 @@ class BuyController extends Controller
         $res = $model->load(Yii::$app->request->post());
         $model->user_id = Yii::$app->user->id;
         if ( $res && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
         $categories     = Category::find()->all();
 
@@ -98,7 +98,7 @@ class BuyController extends Controller
         $res = $model->load(Yii::$app->request->post());
         $model->user_id = Yii::$app->user->id;
         if ( $res && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
         $categories = Category::find()->all();
 
