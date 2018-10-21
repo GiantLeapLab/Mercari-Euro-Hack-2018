@@ -18,6 +18,7 @@ use yii\db\ActiveRecord;
  */
 class SellRequest extends ActiveRecord
 {
+    public $sell = true;
     public $imageName = null;
 
     /**

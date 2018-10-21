@@ -1,3 +1,7 @@
 .idea/
 vendor/
 config/db-local.php
+web/js/bundle.min.js
+web/js/bundle.min.js.map
+web/js/vendor.min.js
+web/js/vendor.min.js.map

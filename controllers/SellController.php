@@ -6,6 +6,7 @@ use app\models\CheckDemandForm;
 use app\models\SellListForm;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
 class SellController extends Controller
@@ -42,8 +43,13 @@ class SellController extends Controller
         $model->load(Yii::$app->request->post());
         $models = $model->prepareData();
 
+        $demand = new CheckDemandForm();
+        $demand->classes = ArrayHelper::getColumn($models, 'title');
+        $prices = $demand->check();
+
         return $this->render('found-items', [
             'models' => $models,
+            'prices' => $prices,
         ]);
     }
 }
