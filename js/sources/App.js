@@ -113,7 +113,10 @@ export default class App {
         this.detectedItems[p.class] = {
           checked : false,
           class : p.class,
-          x, y, width, height
+          x : x  * this.rate,
+          y : y * this.rate,
+          width : width * this.rate,
+          height : height * this.rate,
         }
         needSnapshot.push(p.class)
       }
