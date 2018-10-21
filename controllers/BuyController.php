@@ -72,8 +72,8 @@ class BuyController extends Controller
         $model = new BuyRequest();
         $res = $model->load(Yii::$app->request->post());
         $model->user_id = !empty(Yii::$app->user->id) ? Yii::$app->user->id : 2;
-        $model_res = $model->save();
-        if ( $res && $model_res) {
+
+        if ( $res && $model->save()) {
             return $this->redirect(['index']);
         }
         $categories     = Category::find()->all();
