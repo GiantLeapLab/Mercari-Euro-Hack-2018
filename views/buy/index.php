@@ -12,7 +12,7 @@ app\assets\AppThemeAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Buy Requests';
+$this->title = 'Buyer Wishlist';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="buy-request-index content category">

@@ -8,7 +8,7 @@ AppThemeAsset::register($this);
 /* @var $this yii\web\View */
 /* @var $model app\Models\BuyRequest */
 
-$this->title = 'Update Buy Request: ' . $model->title;
+$this->title = 'Update Buyer Wishlist: ' . ucwords($model->title);
 /*$this->params['breadcrumbs'][] = ['label' => 'Buy Requests', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';*/

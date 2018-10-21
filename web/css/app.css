@@ -117,5 +117,9 @@ header {
     text-decoration-line: underline;
 }
 
+.btn.btn-link.logout{
+    background-color: transparent !important;
+    font-size: 100%;
+}
 
 /*# sourceMappingURL=app.css.map */
