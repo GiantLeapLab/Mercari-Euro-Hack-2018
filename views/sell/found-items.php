@@ -47,10 +47,10 @@ $form = ActiveForm::begin();
         <div class="item">
             <div class="row">
                 <?= $form->field($model,  '[' . $index . ']title', [
-                    'options' => ['class' => 'col-md-6 required '],
+                    'options' => ['class' => 'col-sm-6 required '],
                     'inputOptions' => ['class' => 'block']
                 ]) ?>
-                <div class="col-md-6 sell-check" style="margin-top: 30px;">
+                <div class="col-sm-5 sell-check" style="margin-top: 30px;">
                     <?= $form->field($model, '[' . $index . ']sell')->checkbox() ?>
                 </div>
             </div>
