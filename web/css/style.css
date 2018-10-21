@@ -2368,8 +2368,8 @@ textarea {
     padding: 10px
 }
 
-.btn, input[type=submit],
-.btn, input[type=submit]:hover{
+.btn, input[type=submit]
+{
     text-align: center;
     background-color: #456192 !important;
     font-size: 18px;
@@ -2385,7 +2385,9 @@ textarea {
     width: 110px;
     height: 33px
 }
-
+.btn:hover, input[type=submit]:hover{
+    background-color: #273e67 !important;
+}
 .label, label {
     color: #0b2353 !important;
     margin-bottom: 8px
