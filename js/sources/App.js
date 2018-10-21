@@ -186,7 +186,7 @@ export default class App {
       <div class="inner">
         <div class="top">
           <div class="title">${label}</div>
-          ${checked && maxCost ? `<div class="cost">${cost}</div>` : ''}
+          ${checked && maxCost ? `<div class="cost">$${cost}</div>` : ''}
           ${checked ? `<div class="people">${people}</div>` : ''}
         </div>
       </div>`

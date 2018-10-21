@@ -139,12 +139,13 @@ html, body {
     color: #c30000;
     /*float: right;*/
     padding-right: 10px;
-    background-image: url('../img/cost.png');
+    /* background-image: url('../img/cost.png'); */
     background-repeat: no-repeat;
-    -webkit-background-size: 25px;
+    white-space: nowrap;
+    /* -webkit-background-size: 25px;
     background-size: 25px;
-    background-position: 0 50%;
-    padding-left: 28px;
+    background-position: 0 50%; */
+    /* padding-left: 28px; */
 }
 .frame.not-checked .top .people,
 .frame.not-checked .top .cost {
