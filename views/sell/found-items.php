@@ -9,9 +9,10 @@ use yii\widgets\ActiveForm;
 $form = ActiveForm::begin();
 
 foreach ($models as $index => $model) {
-    $form->field($model, '[' . $index . ']title')->textInput();
-    $form->field($model, '[' . $index . ']description')->textInput();
-    $form->field($model, '[' . $index . ']imageName')->hiddenInput();
+    echo $form->field($model, '[' . $index . ']title')->textInput();
+    echo $form->field($model, '[' . $index . ']description')->textInput();
+    echo $form->field($model, '[' . $index . ']imageName')->textInput();
+    echo "<img src='" . $model->imageName . "' />";
 }
 
 ActiveForm::end();

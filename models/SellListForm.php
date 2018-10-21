@@ -27,24 +27,30 @@ class SellListForm extends Model
         $result = [];
         $images = [];
         $imagine = new Imagine();
-        $this->images = UploadedFile::getInstances($this, 'images');
 
-        foreach ($this->images as $image) {
-            $imageName = uniqid() . $image->extension;
-            $image->saveAs(self::IMAGE_PATH . $imageName);
-            $images[] = $imageName;
+        foreach ($this->images as $data) {
+            if (preg_match('/^data:image\/([\w-]+);base64,/', $data)) {
+                $data = substr($data, strpos($data, ',') + 1);
+                $data = base64_decode($data);
+            } else {
+                throw new \Exception('did not match data URI with image data');
+            }
+
+            $fileName = uniqid() . '.jpeg';
+            $images[] = $fileName;
+            file_put_contents(self::IMAGE_PATH . $fileName, $data);
         }
 
 
         foreach ($this->items as $item) {
-            $image_name = $item['x'] . 'x' . $item['y'] . '_' . $item['height'] . 'x' . $item['width'] . $images[$item['imageIndex']];
-            $imagine->open(self::IMAGE_PATH . $images[$item['imageIndex']])
-                ->crop(new Point($item['x'], $item['y']), new Box($item['height'], $item['width']))
+            $image_name = $item['x'] . 'x' . $item['y'] . '_' . $item['width'] . 'x' . $item['height'] . $images[$item['image']];
+            $imagine->open(self::IMAGE_PATH . $images[$item['image']])
+                ->crop(new Point($item['x'], $item['y']), new Box($item['width'], $item['height']))
                 ->save(self::IMAGE_PATH . $image_name);
 
             $model = new SellRequest();
             $model->title = $item['class'];
-            $model->imageName = self::IMAGE_PATH . $image_name;
+            $model->imageName = '/uploads/' . $image_name;
             $result[] = $model;
         }
 

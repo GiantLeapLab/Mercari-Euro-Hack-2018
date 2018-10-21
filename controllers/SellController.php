@@ -39,7 +39,6 @@ class SellController extends Controller
     {
         
         $model = new SellListForm();
-        mb_parse_str(file_get_contents('php://input'), $post);
         $model->load(Yii::$app->request->post());
         $models = $model->prepareData();
 
