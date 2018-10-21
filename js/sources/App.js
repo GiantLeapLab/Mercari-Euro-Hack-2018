@@ -113,7 +113,10 @@ export default class App {
         this.detectedItems[p.class] = {
           checked : false,
           class : p.class,
-          x, y, width, height
+          x : x  * this.rate,
+          y : y * this.rate,
+          width : width * this.rate,
+          height : height * this.rate,
         }
         needSnapshot.push(p.class)
       }
@@ -248,11 +251,13 @@ export default class App {
       const {checked, minCost, maxCost, people, ...other} = this.detectedItems[c]
       return other
     })
-    postSubmit('/sell/step-2', {
-      SellListForm : {
-        items : arr,
-        images : this.snapshots,
-      }
+
+    // const images = this.snapshots.map(s => (
+    //   new Blob([window.atob(s.split(',')[1])],  {type: 'image/png', encoding: 'utf-8'})
+    // ))
+    postSubmit('/sell/step-2', 'SellListForm', {
+      items : arr,
+      images : this.snapshots,
     })
   }
 

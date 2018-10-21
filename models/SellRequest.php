@@ -18,6 +18,8 @@ use yii\db\ActiveRecord;
  */
 class SellRequest extends ActiveRecord
 {
+    public $imageName = null;
+
     /**
      * {@inheritdoc}
      */
