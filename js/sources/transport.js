@@ -39,7 +39,7 @@ export function fetchPost (url, formName, formData) {
 
 function convertToFormNames (obj) {
     const out = {}
-    if (obj instanceof Object && !(obj instanceof File)) {
+    if (obj instanceof Object && !(obj instanceof File) && !(obj instanceof Blob)) {
       for (let key in obj) {
         if (obj.hasOwnProperty(key)) {
           let arr = convertToFormNames(obj[key])
@@ -57,18 +57,23 @@ function convertToFormNames (obj) {
     return out
   }
 
-  export function postSubmit (path, formData) {
+  export function postSubmit (path, formName, formData) {
     const form = document.createElement("form")
     form.setAttribute("method", 'POST')
     form.setAttribute("action", path)
+    // form.setAttribute("enctype", 'multipart/form-data')
 
     const params = convertToFormNames(formData)
-    
+
     for (var key in params) {
       if (params.hasOwnProperty(key)) {
         const hiddenField = document.createElement("input")
-        hiddenField.setAttribute("type", "hidden")
-        hiddenField.setAttribute("name", key)
+        if (params[key] instanceof Blob) {
+          hiddenField.setAttribute("type", "file")
+        } else {
+          hiddenField.setAttribute("type", "hidden")
+        }
+        hiddenField.setAttribute("name", formName + key)
         hiddenField.setAttribute("value", params[key])
         form.appendChild(hiddenField)
       }
