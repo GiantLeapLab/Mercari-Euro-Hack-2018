@@ -46,14 +46,14 @@ use kartik\select2\Select2;
     ])->fileInput() ?>
     <div class="col-md-8 content">
         <a href="#" class="label block popup-toggle carousel-label" id="popup-opener">Choose the 'laptop' products you like <br>from our library</a>
-        <div class="carousel owl-carousel">
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
-            <div class="item"><img src="/../img/carousel-img.png" alt="product"></div>
+        <div class="carousel owl-carousel" style="display: none;">
+            <div class="item"><img src="/../image_gallery/laptops/laptop-1.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-2.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-3.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-4.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-5.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-6.jpg" alt="product"></div>
+            <div class="item"><img src="/../image_gallery/laptops/laptop-7.jpg" alt="product"></div>
         </div>
     </div>
 </div>
@@ -108,32 +108,32 @@ use kartik\select2\Select2;
                     <label for="product-01" class="col-md-4--theme">
                         <input type="checkbox" name="product-01" id="product-01">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-1.jpg" alt="product">
                     </label>
                     <label for="product-02" class="col-md-4--theme">
                         <input type="checkbox" name="product-02" id="product-02">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-2.jpg" alt="product">
                     </label>
                     <label for="product-03" class="col-md-4--theme">
                         <input type="checkbox" name="product-03" id="product-03">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-3.jpg" alt="product">
                     </label>
                     <label for="product-04" class="col-md-4--theme">
                         <input type="checkbox" name="product-04" id="product-04">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-4.jpg" alt="product">
                     </label>
                     <label for="product-05" class="col-md-4--theme">
                         <input type="checkbox" name="product-05" id="product-05">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-5.jpg" alt="product">
                     </label>
                     <label for="product-06" class="col-md-4--theme">
                         <input type="checkbox" name="product-06" id="product-06">
                         <span class="like"></span>
-                        <img src="/../img/carousel-img.png" alt="product">
+                        <img src="/../image_gallery/laptops/laptop-6.jpg" alt="product">
                     </label>
 
                 </div>
